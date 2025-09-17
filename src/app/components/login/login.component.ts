@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {UsuarioService} from '../../services/usuario.service';
+import {AuthService} from '../../services/auth.service';
 import {LoginRequest} from '../../models/usuario.model';
 
 @Component({
     selector: 'app-login',
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
@@ -20,6 +21,7 @@ export class LoginComponent {
 
     constructor(
         private usuarioService: UsuarioService,
+        private authService: AuthService,
         private router: Router
     ) {
     }
@@ -28,9 +30,9 @@ export class LoginComponent {
         this.usuarioService.login(this.login).subscribe({
             next: (response) => {
                 console.log('Login realizado com sucesso:', response);
-                // Armazenar dados do usuário no localStorage
-                localStorage.setItem('usuarioLogado', JSON.stringify(response));
-                this.router.navigate(['/']);
+                // Usar AuthService para gerenciar o login
+                this.authService.login(response);
+                this.router.navigate(['/cursos']);
             },
             error: (error) => {
                 console.error('Erro ao fazer login:', error);
@@ -40,7 +42,7 @@ export class LoginComponent {
     }
 
     cancelar() {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
     }
 
     irParaRegistro() {

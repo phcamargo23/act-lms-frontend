@@ -3,7 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsuarioService} from '../../services/usuario.service';
-import {EstudanteRequest} from '../../models/usuario.model';
+import {AuthService} from '../../services/auth.service';
+import {EstudanteRequest, LoginResponse} from '../../models/usuario.model';
 
 @Component({
     selector: 'app-registro-estudante',
@@ -24,6 +25,7 @@ export class RegistroEstudanteComponent {
 
     constructor(
         private usuarioService: UsuarioService,
+        private authService: AuthService,
         private router: Router
     ) {
     }
@@ -32,7 +34,22 @@ export class RegistroEstudanteComponent {
         this.usuarioService.registrarEstudante(this.estudante).subscribe({
             next: (response) => {
                 console.log('Estudante registrado com sucesso:', response);
-                this.router.navigate(['/']);
+
+                // Criar objeto LoginResponse para fazer login automático
+                const loginResponse: LoginResponse = {
+                    id: response.id,
+                    primeiroNome: response.primeiroNome,
+                    ultimoNome: response.ultimoNome,
+                    dataNascimento: response.dataNascimento,
+                    email: response.email,
+                    telefone: response.telefone,
+                    tipoUsuario: 'ESTUDANTE',
+                    dataCriacao: response.dataCriacao
+                };
+
+                // Fazer login automático após registro
+                this.authService.login(loginResponse);
+                this.router.navigate(['/cursos']);
             },
             error: (error) => {
                 console.error('Erro ao registrar estudante:', error);
@@ -42,6 +59,6 @@ export class RegistroEstudanteComponent {
     }
 
     cancelar() {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
     }
 }

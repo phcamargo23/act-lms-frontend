@@ -5,21 +5,34 @@
         </div>
 
         <div class="nav-menu">
-            <a class="nav-link" routerLink="/cursos" routerLinkActive="active">
-                Cursos
-            </a>
-            <a class="nav-link" routerLink="/matriculas" routerLinkActive="active">
-                Matrículas
-            </a>
-            <a class="nav-link" routerLink="/tarefas" routerLinkActive="active">
-                Tarefas
-            </a>
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                Login
-            </a>
-            <a class="nav-link nav-registro" routerLink="/registro" routerLinkActive="active">
-                Registrar-se
-            </a>
+            <!-- Menu completo para usuário logado -->
+            <ng-container *ngIf="usuarioLogado">
+                <a class="nav-link" routerLink="/cursos" routerLinkActive="active">
+                    Cursos
+                </a>
+                <a class="nav-link" routerLink="/matriculas" routerLinkActive="active">
+                    Matrículas
+                </a>
+                <a class="nav-link" routerLink="/tarefas" routerLinkActive="active">
+                    Tarefas
+                </a>
+                <span class="nav-user">
+                    Olá, {{ getNomeUsuario() }}
+                </span>
+                <button (click)="logout()" class="nav-link nav-logout">
+                    Sair
+                </button>
+            </ng-container>
+
+            <!-- Apenas login e registro para usuário não logado -->
+            <ng-container *ngIf="!usuarioLogado">
+                <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                    Login
+                </a>
+                <a class="nav-link nav-registro" routerLink="/registro" routerLinkActive="active">
+                    Registrar-se
+                </a>
+            </ng-container>
         </div>
     </div>
 </nav>

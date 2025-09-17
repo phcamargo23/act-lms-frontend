@@ -6,7 +6,7 @@ import {RegistroEstudanteComponent} from './components/registro-estudante/regist
 import {LoginComponent} from './components/login/login.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: '/cursos', pathMatch: 'full'},
+    {path: '', redirectTo: '/login', pathMatch: 'full'},
     {path: 'cursos', component: CursosComponent},
     {path: 'matriculas', component: MatriculasComponent},
     {path: 'tarefas', component: TarefasComponent},

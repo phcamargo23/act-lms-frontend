@@ -57,6 +57,28 @@
     background-color: #1e7e34;
 }
 
+.nav-user {
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.nav-logout {
+    background-color: #dc3545;
+    border: 1px solid #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-logout:hover {
+    background-color: #c82333;
+}
+
+.nav-logout:active {
+    background-color: #bd2130;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
