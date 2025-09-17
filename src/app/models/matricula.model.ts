@@ -1,14 +1,10 @@
-import {Usuario} from './usuario.model';
-import {Curso} from './curso.model';
-
 export interface Matricula {
     id?: number;
-    usuario: Usuario;
-    curso: Curso;
+    usuarioId: number;
+    usuarioNome: string;
+    cursoId: number;
+    cursoNome: string;
     dataInscricao: string;
-    ativa: boolean;
-    dataCriacao?: string;
-    dataAtualizacao?: string;
 }
 
 export interface MatriculaRequest {

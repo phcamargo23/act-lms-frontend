@@ -8,18 +8,15 @@
     <div *ngIf="matriculas.length > 0" class="matriculas-container">
         <div *ngFor="let matricula of matriculas" class="matricula-item">
             <div class="matricula-header">
-                <h4>{{ matricula.curso.nome }}</h4>
-                <span [class.ativa]="matricula.ativa" [class.inativa]="!matricula.ativa" class="status">
-          {{ matricula.ativa ? 'Ativa' : 'Inativa' }}
-        </span>
+                <h4>{{ matricula.cursoNome }}</h4>
             </div>
 
             <div class="matricula-content">
-                <p><strong>Estudante:</strong> {{ matricula.usuario.nome }}</p>
+                <p><strong>Estudante:</strong> {{ matricula.usuarioNome }}</p>
                 <p><strong>Data de Inscrição:</strong> {{ formatarData(matricula.dataInscricao) }}</p>
             </div>
 
-            <div *ngIf="matricula.ativa" class="matricula-actions">
+            <div class="matricula-actions">
                 <button (click)="cancelar(matricula.id!)" class="btn-cancel">Cancelar Matrícula</button>
             </div>
         </div>

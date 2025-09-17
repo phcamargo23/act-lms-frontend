@@ -38,8 +38,8 @@ export class MatriculaFormComponent implements OnInit {
         this.carregarDados();
         if (this.matricula) {
             this.matriculaRequest = {
-                usuarioId: this.matricula.usuario.id!,
-                cursoId: this.matricula.curso.id!
+                usuarioId: this.matricula.usuarioId,
+                cursoId: this.matricula.cursoId
             };
         }
     }
