@@ -4,12 +4,15 @@ import {MatriculasComponent} from './pages/matriculas/matriculas.component';
 import {TarefasComponent} from './pages/tarefas/tarefas.component';
 import {RegistroEstudanteComponent} from './components/registro-estudante/registro-estudante.component';
 import {LoginComponent} from './components/login/login.component';
+import {AuthGuard} from './guards/auth.guard';
+import {GuestGuard} from './guards/guest.guard';
 
 export const routes: Routes = [
-    {path: '', redirectTo: '/login', pathMatch: 'full'},
-    {path: 'cursos', component: CursosComponent},
-    {path: 'matriculas', component: MatriculasComponent},
-    {path: 'tarefas', component: TarefasComponent},
-    {path: 'registro', component: RegistroEstudanteComponent},
-    {path: 'login', component: LoginComponent}
+    {path: '', redirectTo: 'matriculas', pathMatch: 'full'},
+    {path: 'cursos', component: CursosComponent, canActivate: [AuthGuard]},
+    {path: 'matriculas', component: MatriculasComponent, canActivate: [AuthGuard]},
+    {path: 'tarefas', component: TarefasComponent, canActivate: [AuthGuard]},
+    {path: 'registro', component: RegistroEstudanteComponent, canActivate: [GuestGuard]},
+    {path: 'login', component: LoginComponent, canActivate: [GuestGuard]},
+    {path: '**', redirectTo: ''}
 ];
