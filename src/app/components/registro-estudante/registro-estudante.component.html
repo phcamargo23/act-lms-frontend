@@ -1,0 +1,80 @@
+<div class="registro-container">
+    <div class="registro-card">
+        <h2>Registro de Estudante</h2>
+        <form #registroForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="primeiroNome">Primeiro Nome *</label>
+                <input
+                        [(ngModel)]="estudante.primeiroNome"
+                        class="form-control"
+                        id="primeiroNome"
+                        name="primeiroNome"
+                        placeholder="Digite seu primeiro nome"
+                        required
+                        type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="ultimoNome">Último Nome *</label>
+                <input
+                        [(ngModel)]="estudante.ultimoNome"
+                        class="form-control"
+                        id="ultimoNome"
+                        name="ultimoNome"
+                        placeholder="Digite seu último nome"
+                        required
+                        type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="dataNascimento">Data de Nascimento *</label>
+                <input
+                        [(ngModel)]="estudante.dataNascimento"
+                        class="form-control"
+                        id="dataNascimento"
+                        name="dataNascimento"
+                        required
+                        type="date">
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input
+                        [(ngModel)]="estudante.email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                        type="email">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone *</label>
+                <input
+                        [(ngModel)]="estudante.telefone"
+                        class="form-control"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Digite seu telefone"
+                        required
+                        type="tel">
+            </div>
+
+            <div class="form-actions">
+                <button
+                        [disabled]="!registroForm.form.valid"
+                        class="btn btn-primary"
+                        type="submit">
+                    Registrar
+                </button>
+                <button
+                        (click)="cancelar()"
+                        class="btn btn-secondary"
+                        type="button">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

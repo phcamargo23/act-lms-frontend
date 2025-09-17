@@ -44,6 +44,19 @@
     font-weight: bold;
 }
 
+.nav-registro {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.nav-registro:hover {
+    background-color: #218838;
+}
+
+.nav-registro.active {
+    background-color: #1e7e34;
+}
+
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
