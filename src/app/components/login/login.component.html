@@ -1,0 +1,51 @@
+<div class="login-container">
+    <div class="login-card">
+        <h2>Login</h2>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input
+                        [(ngModel)]="login.email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                        type="email">
+            </div>
+
+            <div class="form-group">
+                <label for="senha">Senha *</label>
+                <input
+                        [(ngModel)]="login.senha"
+                        class="form-control"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                        type="password">
+            </div>
+
+            <div class="form-actions">
+                <button
+                        [disabled]="!loginForm.form.valid"
+                        class="btn btn-primary"
+                        type="submit">
+                    Entrar
+                </button>
+                <button
+                        (click)="cancelar()"
+                        class="btn btn-secondary"
+                        type="button">
+                    Cancelar
+                </button>
+            </div>
+
+            <div class="form-footer">
+                <p>Não tem uma conta?
+                    <a (click)="irParaRegistro()" class="link-registro" href="#">Registrar-se</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

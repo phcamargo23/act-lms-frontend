@@ -3,22 +3,18 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsuarioService} from '../../services/usuario.service';
-import {EstudanteRequest} from '../../models/usuario.model';
+import {LoginRequest} from '../../models/usuario.model';
 
 @Component({
-    selector: 'app-registro-estudante',
+    selector: 'app-login',
     standalone: true,
     imports: [CommonModule, FormsModule],
-    templateUrl: './registro-estudante.component.html',
-    styleUrls: ['./registro-estudante.component.css']
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
-export class RegistroEstudanteComponent {
-    estudante: EstudanteRequest = {
-        primeiroNome: '',
-        ultimoNome: '',
-        dataNascimento: '',
+export class LoginComponent {
+    login: LoginRequest = {
         email: '',
-        telefone: '',
         senha: ''
     };
 
@@ -29,19 +25,25 @@ export class RegistroEstudanteComponent {
     }
 
     onSubmit() {
-        this.usuarioService.registrarEstudante(this.estudante).subscribe({
+        this.usuarioService.login(this.login).subscribe({
             next: (response) => {
-                console.log('Estudante registrado com sucesso:', response);
+                console.log('Login realizado com sucesso:', response);
+                // Armazenar dados do usuário no localStorage
+                localStorage.setItem('usuarioLogado', JSON.stringify(response));
                 this.router.navigate(['/']);
             },
             error: (error) => {
-                console.error('Erro ao registrar estudante:', error);
-                alert('Erro ao registrar estudante. Verifique os dados e tente novamente.');
+                console.error('Erro ao fazer login:', error);
+                alert('Email ou senha incorretos. Tente novamente.');
             }
         });
     }
 
     cancelar() {
         this.router.navigate(['/']);
+    }
+
+    irParaRegistro() {
+        this.router.navigate(['/registro']);
     }
 }

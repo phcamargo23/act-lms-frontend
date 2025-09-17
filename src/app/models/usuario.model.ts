@@ -7,6 +7,7 @@ export interface Usuario {
     telefone?: string;
     tipoUsuario?: 'ADMIN' | 'ESTUDANTE';
     email: string;
+    senha?: string;
     ativo: boolean;
     dataCriacao?: string;
     dataAtualizacao?: string;
@@ -18,6 +19,7 @@ export interface EstudanteRequest {
     dataNascimento: string;
     email: string;
     telefone: string;
+    senha: string;
 }
 
 export interface EstudanteResponse {
@@ -27,6 +29,22 @@ export interface EstudanteResponse {
     dataNascimento: string;
     email: string;
     telefone: string;
+    dataCriacao: string;
+}
+
+export interface LoginRequest {
+    email: string;
+    senha: string;
+}
+
+export interface LoginResponse {
+    id: number;
+    primeiroNome: string;
+    ultimoNome: string;
+    dataNascimento: string;
+    email: string;
+    telefone: string;
+    tipoUsuario: string;
     dataCriacao: string;
 }
 
