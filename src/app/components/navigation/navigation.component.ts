@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {LoginResponse} from '../../models/usuario.model';
 import {Subscription} from 'rxjs';
@@ -17,7 +17,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     usuarioLogado: LoginResponse | null = null;
     private subscription: Subscription = new Subscription();
 
-    constructor(private authService: AuthService) {
+    constructor(
+        private authService: AuthService,
+        private router: Router
+    ) {
     }
 
     ngOnInit(): void {
@@ -32,6 +35,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     logout(): void {
         this.authService.logout();
+        this.router.navigate(['/login']);
     }
 
     getNomeUsuario(): string {
