@@ -1,0 +1,35 @@
+<div class="tarefas-list">
+    <h3>Tarefas</h3>
+
+    <div *ngIf="tarefas.length === 0" class="no-tarefas">
+        <p>Nenhuma tarefa encontrada.</p>
+    </div>
+
+    <div *ngIf="tarefas.length > 0" class="tarefas-container">
+        <div *ngFor="let tarefa of tarefas" class="tarefa-item">
+            <div class="tarefa-header">
+                <h4>{{ formatarData(tarefa.dataTarefa) }}</h4>
+                <span class="categoria-badge">{{ tarefa.categoriaNome }}</span>
+            </div>
+
+            <div class="tarefa-content">
+                <p class="usuario-info">
+                    <strong>👤</strong> {{ tarefa.matriculaUsuarioNome }}
+                </p>
+
+                <div *ngIf="tarefa.descricao" class="descricao">
+                    <strong>📝</strong> {{ truncarTexto(tarefa.descricao) }}
+                </div>
+
+                <div class="tempo-info">
+                    <strong>⏱️</strong> {{ formatarTempo(tarefa.tempoGastoMinutos) }}
+                </div>
+            </div>
+
+            <div class="tarefa-actions">
+                <button (click)="editar(tarefa)" class="btn-edit">✏️ Editar</button>
+                <button (click)="excluir(tarefa.id!)" class="btn-delete">🗑️ Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
