@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="header">
+        <h2>Lista de Cursos</h2>
+    </div>
+
+    <div class="table-container">
+        <table class="curso-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let curso of cursos">
+                <td>{{ curso.id }}</td>
+                <td>{{ curso.nome }}</td>
+                <td class="actions">
+                    <button (click)="editarCursoClick(curso)" class="btn btn-sm btn-secondary">Editar</button>
+                    <button (click)="deletarCursoClick(curso.id!)" class="btn btn-sm btn-danger">Deletar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="cursos.length === 0" class="no-data">
+        Nenhum curso encontrado.
+    </div>
+</div>
+

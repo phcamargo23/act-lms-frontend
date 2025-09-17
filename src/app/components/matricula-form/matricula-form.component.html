@@ -1,0 +1,31 @@
+<div class="matricula-form">
+    <h3>Nova Matrícula</h3>
+
+    <form (ngSubmit)="salvar()">
+        <div class="form-group">
+            <label for="usuario">Usuário:</label>
+            <select [(ngModel)]="matriculaRequest.usuarioId" id="usuario" name="usuarioId" required>
+                <option value="0">Selecione um usuário</option>
+                <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nome }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="curso">Curso:</label>
+            <select [(ngModel)]="matriculaRequest.cursoId" id="curso" name="cursoId" required>
+                <option value="0">Selecione um curso</option>
+                <option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nome }}</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">
+                Matricular
+            </button>
+            <button (click)="resetarFormulario()" class="btn-secondary" type="button">
+                Limpar
+            </button>
+        </div>
+    </form>
+</div>
+

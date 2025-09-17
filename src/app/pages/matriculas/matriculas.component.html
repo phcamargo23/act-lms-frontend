@@ -1,0 +1,18 @@
+<div class="matriculas-page">
+    <h1>Gerenciar Matrículas</h1>
+
+    <section class="section">
+        <h2>Nova Matrícula</h2>
+        <app-matricula-form
+                (matriculaSalva)="onMatriculaSalva($event)">
+        </app-matricula-form>
+    </section>
+
+    <section class="section">
+        <h2>Lista de Matrículas</h2>
+        <app-matricula-list
+                (matriculaCancelada)="onMatriculaCancelada($event)"
+                [matriculas]="matriculas">
+        </app-matricula-list>
+    </section>
+</div>

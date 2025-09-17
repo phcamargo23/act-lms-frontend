@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="header">
+        <h2>{{ isEditando ? 'Editar Curso' : 'Novo Curso' }}</h2>
+    </div>
+
+    <form (ngSubmit)="salvar()" class="curso-form">
+        <div class="form-group">
+            <label for="nome">Nome *</label>
+            <input
+                    [(ngModel)]="cursoForm.nome"
+                    [class.error]="!cursoForm.nome"
+                    class="form-control"
+                    id="nome"
+                    name="nome"
+                    required
+                    type="text">
+        </div>
+
+        <div class="form-actions">
+            <button (click)="resetarFormulario()" class="btn btn-secondary" type="button">Cancelar</button>
+            <button [disabled]="!isFormValid()" class="btn btn-primary" type="submit">
+                {{ isEditando ? 'Atualizar' : 'Criar' }}
+            </button>
+        </div>
+    </form>
+
+    <div *ngIf="erro" class="error-message">
+        {{ erro }}
+    </div>
+</div>
+
