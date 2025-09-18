@@ -1,0 +1,97 @@
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8">
+            <!-- Header Section -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">
+                    <i class="bi bi-pencil-square me-3"></i>
+                    {{ isEditando ? 'Editar Curso' : 'Novo Curso' }}
+                </h1>
+                <p class="lead text-muted">
+                    {{ isEditando ? 'Atualize as informações do curso' : 'Preencha os dados para criar um novo curso' }}
+                </p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white py-4 rounded-top-4">
+                    <h2 class="card-title mb-0 fw-bold text-center">
+                        <i class="bi bi-book me-2"></i>
+                        {{ isEditando ? 'Editar Curso' : 'Criar Novo Curso' }}
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form #cursoFormRef="ngForm" (ngSubmit)="salvar()">
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="nome">
+                                <i class="bi bi-book me-1"></i>
+                                Nome do Curso *
+                            </label>
+                            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-mortarboard text-muted"></i>
+                </span>
+                                <input
+                                        [(ngModel)]="cursoForm.nome"
+                                        class="form-control border-start-0 ps-0"
+                                        id="nome"
+                                        name="nome"
+                                        placeholder="Digite o nome do curso"
+                                        required
+                                        type="text">
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div *ngIf="erro" class="alert alert-danger border-0 rounded-3 mb-4">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            {{ erro }}
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3 mt-4">
+                            <button
+                                    [disabled]="!cursoFormRef.form.valid || carregando"
+                                    class="btn btn-primary btn-lg fw-medium py-2"
+                                    type="submit">
+                                <span *ngIf="carregando" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                <i *ngIf="!carregando" class="bi bi-check-circle me-2"></i>
+                                {{ carregando ? 'Salvando...' : (isEditando ? 'Atualizar Curso' : 'Criar Curso') }}
+                            </button>
+                            <button
+                                    (click)="cancelarEdicao()"
+                                    [disabled]="carregando"
+                                    class="btn btn-outline-secondary fw-medium"
+                                    type="button">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Voltar para Lista
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div *ngIf="isEditando && curso" class="card shadow-sm border-0 rounded-4 mt-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold text-dark mb-1">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Informações do Curso
+                            </h6>
+                            <p class="text-muted mb-0">
+                                Editando: <strong>{{ curso.nome }}</strong> (ID: {{ curso.id }})
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-end">
+              <span class="badge bg-primary bg-opacity-10 text-primary fw-medium px-3 py-2 rounded-pill">
+                Modo Edição
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
