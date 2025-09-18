@@ -4,6 +4,7 @@ import {MatriculaFormComponent} from '../../components/matricula-form/matricula-
 import {MatriculaListComponent} from '../../components/matricula-list/matricula-list.component';
 import {Matricula} from '../../models/matricula.model';
 import {MatriculaService} from '../../services/matricula.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-matriculas',
@@ -15,7 +16,10 @@ import {MatriculaService} from '../../services/matricula.service';
 export class MatriculasComponent implements OnInit {
     matriculas: Matricula[] = [];
 
-    constructor(private matriculaService: MatriculaService) {
+    constructor(
+        private matriculaService: MatriculaService,
+        private authService: AuthService
+    ) {
     }
 
     ngOnInit() {
@@ -23,9 +27,12 @@ export class MatriculasComponent implements OnInit {
     }
 
     carregarMatriculas() {
-        this.matriculaService.listarTodasMatriculas().subscribe(matriculas => {
-            this.matriculas = matriculas;
-        });
+        const usuarioLogado = this.authService.getUsuarioLogado();
+        if (usuarioLogado) {
+            this.matriculaService.listarMatriculasPorUsuario(usuarioLogado.id).subscribe(matriculas => {
+                this.matriculas = matriculas;
+            });
+        }
     }
 
     onMatriculaSalva(matricula: Matricula) {
