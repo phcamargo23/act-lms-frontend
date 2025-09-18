@@ -1,9 +1,9 @@
-<div class="login-container">
-    <div class="login-card">
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow p-4 w-100" style="max-width: 400px;">
         <h2>Login</h2>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="email">E-mail *</label>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail *</label>
                 <input
                         [(ngModel)]="login.email"
                         class="form-control"
@@ -14,8 +14,8 @@
                         type="email">
             </div>
 
-            <div class="form-group">
-                <label for="senha">Senha *</label>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha *</label>
                 <input
                         [(ngModel)]="login.senha"
                         class="form-control"
@@ -26,7 +26,7 @@
                         type="password">
             </div>
 
-            <div class="form-actions">
+            <div class="d-grid gap-2 mt-3">
                 <button
                         [disabled]="!loginForm.form.valid"
                         class="btn btn-primary"
@@ -41,9 +41,9 @@
                 </button>
             </div>
 
-            <div class="form-footer">
+            <div class="text-center mt-3 pt-3 border-top">
                 <p>Não tem uma conta?
-                    <a (click)="irParaRegistro()" class="link-registro" routerLink="/registro" routerLinkActive="active">Registrar-se</a>
+                    <a (click)="irParaRegistro()" class="text-primary" routerLink="/registro" routerLinkActive="active">Registrar-se</a>
                 </p>
             </div>
         </form>
