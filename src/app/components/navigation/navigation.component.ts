@@ -41,4 +41,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     getNomeUsuario(): string {
         return this.authService.getNomeUsuario();
     }
+
+    isAdmin(): boolean {
+        const usuario = this.authService.getUsuarioLogado();
+        return usuario?.tipoUsuario === 'ADMIN';
+    }
 }
