@@ -1,23 +1,54 @@
-<div class="container mt-4">
-    <h3 class="mb-3">Matrículas</h3>
-
-    <div *ngIf="matriculas.length === 0" class="alert alert-info">
-        <p>Nenhuma matrícula encontrada.</p>
+<div *ngIf="matriculas.length === 0" class="text-center py-5">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+            <i class="bi bi-person-lines-fill display-1 text-muted mb-3"></i>
+            <h4 class="text-muted mb-3">Nenhuma matrícula encontrada</h4>
+            <p class="text-muted">Você ainda não se inscreveu em nenhum curso.</p>
+        </div>
     </div>
+</div>
 
-    <div *ngIf="matriculas.length > 0" class="row">
-        <div *ngFor="let matricula of matriculas" class="col-md-6 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4>{{ matricula.cursoNome }}</h4>
+<div *ngIf="matriculas.length > 0" class="row g-4">
+    <div *ngFor="let matricula of matriculas" class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 hover-shadow">
+            <div class="card-header bg-success text-white py-3 rounded-top-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-mortarboard me-2"></i>
+                        {{ matricula.cursoNome }}
+                    </h5>
+                    <span class="badge bg-light text-success fw-medium">
+                        <i class="bi bi-check-circle me-1"></i>
+                        Ativa
+                    </span>
                 </div>
-
-                <div class="card-body">
-                    <p><strong>Data de Inscrição:</strong> {{ formatarData(matricula.dataInscricao) }}</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <h6 class="text-muted mb-1">Data de Inscrição</h6>
+                    <p class="mb-0 fw-medium">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        {{ formatarData(matricula.dataInscricao) }}
+                    </p>
                 </div>
-
-                <div class="card-footer text-end">
-                    <button (click)="cancelar(matricula.id!)" class="btn btn-danger btn-sm">Cancelar Matrícula</button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-1">Status</h6>
+                        <span class="badge bg-success">Matriculado</span>
+                    </div>
+                    <div class="text-end">
+                        <i class="bi bi-person-check-fill text-success fs-4"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light border-0 rounded-bottom-4 p-3">
+                <div class="d-grid">
+                    <button
+                            (click)="cancelar(matricula.id!)"
+                            class="btn btn-outline-danger btn-sm fw-medium">
+                        <i class="bi bi-x-circle me-1"></i>
+                        Cancelar Matrícula
+                    </button>
                 </div>
             </div>
         </div>
