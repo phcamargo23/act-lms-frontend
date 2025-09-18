@@ -1,0 +1,17 @@
+<div *ngIf="carregando" class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8 text-center">
+            <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <p class="text-muted">Carregando curso...</p>
+        </div>
+    </div>
+</div>
+
+<app-curso-edit
+        (cancelar)="onCancelar()"
+        (cursoSalvo)="onCursoSalvo($event)"
+        *ngIf="!carregando && curso"
+        [curso]="curso">
+</app-curso-edit>

@@ -11,7 +11,6 @@ import {EstudanteRequest, LoginResponse} from '../../models/usuario.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './registro-estudante.component.html',
-    styleUrls: ['./registro-estudante.component.css']
 })
 export class RegistroEstudanteComponent {
     estudante: EstudanteRequest = {
@@ -59,6 +58,10 @@ export class RegistroEstudanteComponent {
     }
 
     cancelar() {
+        this.router.navigate(['/login']);
+    }
+
+    irParaLogin() {
         this.router.navigate(['/login']);
     }
 }

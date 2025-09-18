@@ -12,7 +12,7 @@ import {Curso} from '../../models/curso.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './matricula-form.component.html',
-    styleUrls: ['./matricula-form.component.css']
+
 })
 export class MatriculaFormComponent implements OnInit {
     @Input() matricula?: Matricula;

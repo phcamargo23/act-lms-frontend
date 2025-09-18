@@ -1,92 +1,164 @@
-<div class="registro-container">
-    <div class="registro-card">
-        <h2>Registro de Estudante</h2>
-        <form #registroForm="ngForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="primeiroNome">Primeiro Nome *</label>
-                <input
-                        [(ngModel)]="estudante.primeiroNome"
-                        class="form-control"
-                        id="primeiroNome"
-                        name="primeiroNome"
-                        placeholder="Digite seu primeiro nome"
-                        required
-                        type="text">
-            </div>
+<div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div class="row w-100 justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white text-center py-4 rounded-top-4">
+                    <h2 class="mb-0 fw-bold">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Registro de Estudante
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form #registroForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-medium text-dark" for="primeiroNome">
+                                    <i class="bi bi-person me-1"></i>
+                                    Primeiro Nome *
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="bi bi-person-circle text-muted"></i>
+                                    </span>
+                                    <input
+                                            [(ngModel)]="estudante.primeiroNome"
+                                            class="form-control border-start-0 ps-0"
+                                            id="primeiroNome"
+                                            name="primeiroNome"
+                                            placeholder="Digite seu primeiro nome"
+                                            required
+                                            type="text">
+                                </div>
+                            </div>
 
-            <div class="form-group">
-                <label for="ultimoNome">Último Nome *</label>
-                <input
-                        [(ngModel)]="estudante.ultimoNome"
-                        class="form-control"
-                        id="ultimoNome"
-                        name="ultimoNome"
-                        placeholder="Digite seu último nome"
-                        required
-                        type="text">
-            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="form-label fw-medium text-dark" for="ultimoNome">
+                                    <i class="bi bi-person me-1"></i>
+                                    Último Nome *
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light border-end-0">
+                                        <i class="bi bi-person-circle text-muted"></i>
+                                    </span>
+                                    <input
+                                            [(ngModel)]="estudante.ultimoNome"
+                                            class="form-control border-start-0 ps-0"
+                                            id="ultimoNome"
+                                            name="ultimoNome"
+                                            placeholder="Digite seu último nome"
+                                            required
+                                            type="text">
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="dataNascimento">Data de Nascimento *</label>
-                <input
-                        [(ngModel)]="estudante.dataNascimento"
-                        class="form-control"
-                        id="dataNascimento"
-                        name="dataNascimento"
-                        required
-                        type="date">
-            </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="dataNascimento">
+                                <i class="bi bi-calendar me-1"></i>
+                                Data de Nascimento *
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-calendar-date text-muted"></i>
+                                </span>
+                                <input
+                                        [(ngModel)]="estudante.dataNascimento"
+                                        class="form-control border-start-0 ps-0"
+                                        id="dataNascimento"
+                                        name="dataNascimento"
+                                        required
+                                        type="date">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="email">E-mail *</label>
-                <input
-                        [(ngModel)]="estudante.email"
-                        class="form-control"
-                        id="email"
-                        name="email"
-                        placeholder="Digite seu e-mail"
-                        required
-                        type="email">
-            </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="email">
+                                <i class="bi bi-envelope me-1"></i>
+                                E-mail *
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-at text-muted"></i>
+                                </span>
+                                <input
+                                        [(ngModel)]="estudante.email"
+                                        class="form-control border-start-0 ps-0"
+                                        id="email"
+                                        name="email"
+                                        placeholder="Digite seu e-mail"
+                                        required
+                                        type="email">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="telefone">Telefone *</label>
-                <input
-                        [(ngModel)]="estudante.telefone"
-                        class="form-control"
-                        id="telefone"
-                        name="telefone"
-                        placeholder="Digite seu telefone"
-                        required
-                        type="tel">
-            </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="telefone">
+                                <i class="bi bi-telephone me-1"></i>
+                                Telefone *
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-phone text-muted"></i>
+                                </span>
+                                <input
+                                        [(ngModel)]="estudante.telefone"
+                                        class="form-control border-start-0 ps-0"
+                                        id="telefone"
+                                        name="telefone"
+                                        placeholder="Digite seu telefone"
+                                        required
+                                        type="tel">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label for="senha">Senha *</label>
-                <input
-                        [(ngModel)]="estudante.senha"
-                        class="form-control"
-                        id="senha"
-                        name="senha"
-                        placeholder="Digite sua senha"
-                        required
-                        type="password">
-            </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="senha">
+                                <i class="bi bi-lock me-1"></i>
+                                Senha *
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-key text-muted"></i>
+                                </span>
+                                <input
+                                        [(ngModel)]="estudante.senha"
+                                        class="form-control border-start-0 ps-0"
+                                        id="senha"
+                                        name="senha"
+                                        placeholder="Digite sua senha"
+                                        required
+                                        type="password">
+                            </div>
+                        </div>
 
-            <div class="form-actions">
-                <button
-                        [disabled]="!registroForm.form.valid"
-                        class="btn btn-primary"
-                        type="submit">
-                    Registrar
-                </button>
-                <button
-                        (click)="cancelar()"
-                        class="btn btn-secondary"
-                        type="button">
-                    Cancelar
-                </button>
+                        <div class="d-grid gap-3 mt-4">
+                            <button
+                                    [disabled]="!registroForm.form.valid"
+                                    class="btn btn-primary btn-lg fw-medium py-2"
+                                    type="submit">
+                                <i class="bi bi-person-plus me-2"></i>
+                                Registrar-se
+                            </button>
+                            <button
+                                    (click)="cancelar()"
+                                    class="btn btn-outline-secondary fw-medium"
+                                    type="button">
+                                <i class="bi bi-x-circle me-2"></i>
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-light text-center py-3 rounded-bottom-4">
+                    <p class="mb-0 text-muted">
+                        Já tem uma conta?
+                        <a (click)="irParaLogin()" class="text-primary text-decoration-none fw-medium ms-1" routerLink="/login" routerLinkActive="active">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>
+                            Fazer Login
+                        </a>
+                    </p>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>

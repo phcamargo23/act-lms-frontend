@@ -1,20 +1,19 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
 import {CursoService} from '../../services/curso.service';
 import {Curso} from '../../models/curso.model';
 
 @Component({
-    selector: 'app-curso-list',
+    selector: 'app-curso-table',
     standalone: true,
-    imports: [CommonModule, FormsModule],
-    templateUrl: './curso-list.component.html',
-
+    imports: [CommonModule],
+    templateUrl: './curso-table.component.html',
 })
-export class CursoListComponent implements OnInit {
+export class CursoTableComponent implements OnInit {
     @Input() cursos: Curso[] = [];
     @Output() editarCurso = new EventEmitter<Curso>();
     @Output() cursoDeletado = new EventEmitter<number>();
+    @Output() novoCurso = new EventEmitter<void>();
 
     constructor(private cursoService: CursoService) {
     }
@@ -48,4 +47,7 @@ export class CursoListComponent implements OnInit {
         }
     }
 
+    novoCursoClick() {
+        this.novoCurso.emit();
+    }
 }

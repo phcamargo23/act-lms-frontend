@@ -1,21 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CursoService} from '../../services/curso.service';
 import {Curso} from '../../models/curso.model';
 
 @Component({
-    selector: 'app-curso-form',
+    selector: 'app-curso-edit',
     standalone: true,
     imports: [CommonModule, FormsModule],
-    templateUrl: './curso-form.component.html',
-
+    templateUrl: './curso-edit.component.html',
 })
-export class CursoFormComponent implements OnInit, OnChanges {
+export class CursoEditComponent implements OnInit {
     @Input() curso?: Curso;
     @Output() cursoSalvo = new EventEmitter<Curso>();
-
-    cursoId?: number;
+    @Output() cancelar = new EventEmitter<void>();
 
     cursoForm: Curso = {
         nome: ''
@@ -23,6 +21,7 @@ export class CursoFormComponent implements OnInit, OnChanges {
 
     isEditando = false;
     erro = '';
+    carregando = false;
 
     constructor(private cursoService: CursoService) {
     }
@@ -31,19 +30,14 @@ export class CursoFormComponent implements OnInit, OnChanges {
         this.atualizarFormulario();
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        console.log('ngOnChanges chamado:', changes);
-        if (changes['curso'] && changes['curso'].currentValue) {
-            console.log('Curso mudou:', changes['curso'].currentValue);
-            this.atualizarFormulario();
-        }
+    ngOnChanges() {
+        this.atualizarFormulario();
     }
 
     atualizarFormulario() {
         if (this.curso) {
             console.log('Atualizando formulário com curso:', this.curso);
             this.cursoForm = {...this.curso};
-            this.cursoId = this.curso.id;
             this.isEditando = true;
         } else {
             this.resetarFormulario();
@@ -52,23 +46,27 @@ export class CursoFormComponent implements OnInit, OnChanges {
 
     salvar() {
         this.erro = '';
+        this.carregando = true;
 
         if (!this.isFormValid()) {
             this.erro = 'Por favor, preencha todos os campos obrigatórios';
+            this.carregando = false;
             return;
         }
 
-        if (this.isEditando && this.cursoId) {
-            console.log('Atualizando curso:', this.cursoId, this.cursoForm);
-            this.cursoService.atualizarCurso(this.cursoId, this.cursoForm).subscribe({
+        if (this.isEditando && this.curso?.id) {
+            console.log('Atualizando curso:', this.curso.id, this.cursoForm);
+            this.cursoService.atualizarCurso(this.curso.id, this.cursoForm).subscribe({
                 next: (curso) => {
                     console.log('Curso atualizado com sucesso:', curso);
                     this.cursoSalvo.emit(curso);
                     this.resetarFormulario();
+                    this.carregando = false;
                 },
                 error: (error) => {
                     this.erro = 'Erro ao atualizar curso';
                     console.error('Erro ao atualizar curso:', error);
+                    this.carregando = false;
                 }
             });
         } else {
@@ -76,10 +74,12 @@ export class CursoFormComponent implements OnInit, OnChanges {
                 next: (curso) => {
                     this.cursoSalvo.emit(curso);
                     this.resetarFormulario();
+                    this.carregando = false;
                 },
                 error: (error) => {
                     this.erro = 'Erro ao criar curso';
                     console.error('Erro ao criar curso:', error);
+                    this.carregando = false;
                 }
             });
         }
@@ -88,10 +88,15 @@ export class CursoFormComponent implements OnInit, OnChanges {
     resetarFormulario() {
         this.cursoForm = {nome: ''};
         this.isEditando = false;
-        this.cursoId = undefined;
+        this.erro = '';
+    }
+
+    cancelarEdicao() {
+        this.resetarFormulario();
+        this.cancelar.emit();
     }
 
     isFormValid(): boolean {
-        return !!this.cursoForm.nome;
+        return !!this.cursoForm.nome?.trim();
     }
 }

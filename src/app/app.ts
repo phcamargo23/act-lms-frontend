@@ -9,7 +9,7 @@ import {AuthService} from './services/auth.service';
     standalone: true,
     imports: [CommonModule, RouterOutlet, NavigationComponent],
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+
 })
 export class AppComponent implements OnInit {
 

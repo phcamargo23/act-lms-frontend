@@ -8,7 +8,7 @@ import {MatriculaService} from '../../services/matricula.service';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './matricula-list.component.html',
-    styleUrls: ['./matricula-list.component.css']
+
 })
 export class MatriculaListComponent {
     @Input() matriculas: Matricula[] = [];

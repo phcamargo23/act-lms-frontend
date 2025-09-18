@@ -1,66 +1,123 @@
-<div class="tarefa-form">
-    <h3>{{ tarefa ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
-
-    <form (ngSubmit)="salvar()">
-        <div class="form-group">
-            <label for="matricula">Matrícula:</label>
-            <select [(ngModel)]="tarefaRequest.matriculaId" id="matricula" name="matriculaId" required>
+<form #tarefaFormRef="ngForm" (ngSubmit)="salvar()">
+    <div class="mb-4">
+        <label class="form-label fw-medium text-dark" for="matricula">
+            <i class="bi bi-person-lines-fill me-1"></i>
+            Matrícula *
+        </label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-mortarboard text-muted"></i>
+            </span>
+            <select
+                    [(ngModel)]="tarefaRequest.matriculaId"
+                    class="form-select border-start-0 ps-0"
+                    id="matricula"
+                    name="matriculaId"
+                    required>
                 <option value="0">Selecione uma matrícula</option>
                 <option *ngFor="let matricula of matriculas" [value]="matricula.id">
                     {{ matricula.usuarioNome }} - {{ matricula.cursoNome }}
                 </option>
             </select>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="categoria">Categoria:</label>
-            <select [(ngModel)]="tarefaRequest.categoriaId" id="categoria" name="categoriaId" required>
+    <div class="mb-4">
+        <label class="form-label fw-medium text-dark" for="categoria">
+            <i class="bi bi-tags me-1"></i>
+            Categoria *
+        </label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-collection text-muted"></i>
+            </span>
+            <select
+                    [(ngModel)]="tarefaRequest.categoriaId"
+                    class="form-select border-start-0 ps-0"
+                    id="categoria"
+                    name="categoriaId"
+                    required>
                 <option value="0">Selecione uma categoria</option>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">
                     {{ categoria.tipo }}
                 </option>
             </select>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="dataTarefa">Data da Tarefa:</label>
+    <div class="mb-4">
+        <label class="form-label fw-medium text-dark" for="dataTarefa">
+            <i class="bi bi-calendar me-1"></i>
+            Data da Tarefa *
+        </label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-calendar-date text-muted"></i>
+            </span>
             <input
                     [(ngModel)]="tarefaRequest.dataTarefa"
+                    class="form-control border-start-0 ps-0"
                     id="dataTarefa"
                     name="dataTarefa"
                     required
                     type="date">
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="descricao">Descrição:</label>
+    <div class="mb-4">
+        <label class="form-label fw-medium text-dark" for="descricao">
+            <i class="bi bi-file-text me-1"></i>
+            Descrição
+        </label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0 align-items-start pt-3">
+                <i class="bi bi-pencil text-muted"></i>
+            </span>
             <textarea
                     [(ngModel)]="tarefaRequest.descricao"
+                    class="form-control border-start-0 ps-0"
                     id="descricao"
                     name="descricao"
                     placeholder="Descreva a tarefa realizada..."
                     rows="3">
             </textarea>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="tempoGasto">Tempo Gasto (minutos):</label>
+    <div class="mb-4">
+        <label class="form-label fw-medium text-dark" for="tempoGasto">
+            <i class="bi bi-clock me-1"></i>
+            Tempo Gasto (minutos)
+        </label>
+        <div class="input-group">
+            <span class="input-group-text bg-light border-end-0">
+                <i class="bi bi-stopwatch text-muted"></i>
+            </span>
             <input
                     [(ngModel)]="tarefaRequest.tempoGastoMinutos"
+                    class="form-control border-start-0 ps-0"
                     id="tempoGasto"
                     min="0"
                     name="tempoGastoMinutos"
                     placeholder="Ex: 120"
                     type="number">
         </div>
+    </div>
 
-        <div class="form-actions">
-            <button class="btn-primary" type="submit">
-                {{ tarefa ? 'Atualizar' : 'Salvar' }}
-            </button>
-            <button (click)="resetarFormulario()" class="btn-secondary" type="button">
-                Limpar
-            </button>
-        </div>
-    </form>
-</div>
+    <div class="d-grid gap-3 mt-4">
+        <button
+                [disabled]="!tarefaFormRef.form.valid"
+                class="btn btn-primary btn-lg fw-medium py-2"
+                type="submit">
+            <i class="bi bi-check-circle me-2"></i>
+            {{ tarefa ? 'Atualizar Tarefa' : 'Salvar Tarefa' }}
+        </button>
+        <button
+                (click)="resetarFormulario()"
+                class="btn btn-outline-secondary fw-medium"
+                type="button">
+            <i class="bi bi-x-circle me-2"></i>
+            Limpar
+        </button>
+    </div>
+</form>

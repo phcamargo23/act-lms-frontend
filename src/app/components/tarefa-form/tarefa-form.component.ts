@@ -11,7 +11,7 @@ import {Matricula} from '../../models/matricula.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './tarefa-form.component.html',
-    styleUrls: ['./tarefa-form.component.css']
+
 })
 export class TarefaFormComponent implements OnInit {
     @Input() tarefa?: Tarefa;

@@ -1,34 +1,70 @@
-<div class="tarefas-list">
-    <h3>Tarefas</h3>
-
-    <div *ngIf="tarefas.length === 0" class="no-tarefas">
-        <p>Nenhuma tarefa encontrada.</p>
+<div *ngIf="tarefas.length === 0" class="text-center py-5">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+            <i class="bi bi-list-task display-1 text-muted mb-3"></i>
+            <h4 class="text-muted mb-3">Nenhuma tarefa encontrada</h4>
+            <p class="text-muted">Não há tarefas registradas ainda.</p>
+        </div>
     </div>
+</div>
 
-    <div *ngIf="tarefas.length > 0" class="tarefas-container">
-        <div *ngFor="let tarefa of tarefas" class="tarefa-item">
-            <div class="tarefa-header">
-                <h4>{{ formatarData(tarefa.dataTarefa) }}</h4>
-                <span class="categoria-badge">{{ tarefa.categoriaNome }}</span>
-            </div>
-
-            <div class="tarefa-content">
-                <p class="usuario-info">
-                    <strong>👤</strong> {{ tarefa.matriculaUsuarioNome }}
-                </p>
-
-                <div *ngIf="tarefa.descricao" class="descricao">
-                    <strong>📝</strong> {{ truncarTexto(tarefa.descricao) }}
-                </div>
-
-                <div class="tempo-info">
-                    <strong>⏱️</strong> {{ formatarTempo(tarefa.tempoGastoMinutos) }}
+<div *ngIf="tarefas.length > 0" class="row g-4">
+    <div *ngFor="let tarefa of tarefas" class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0 rounded-4 hover-shadow">
+            <div class="card-header bg-info text-white py-3 rounded-top-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-calendar-event me-2"></i>
+                        {{ formatarData(tarefa.dataTarefa) }}
+                    </h5>
+                    <span class="badge bg-light text-info fw-medium">{{ tarefa.categoriaNome }}</span>
                 </div>
             </div>
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <h6 class="text-muted mb-1">Estudante</h6>
+                    <p class="mb-0 fw-medium">
+                        <i class="bi bi-person me-2"></i>
+                        {{ tarefa.matriculaUsuarioNome }}
+                    </p>
+                </div>
 
-            <div class="tarefa-actions">
-                <button (click)="editar(tarefa)" class="btn-edit">✏️ Editar</button>
-                <button (click)="excluir(tarefa.id!)" class="btn-delete">🗑️ Excluir</button>
+                <div *ngIf="tarefa.descricao" class="mb-3">
+                    <h6 class="text-muted mb-1">Descrição</h6>
+                    <p class="mb-0 fw-medium">
+                        <i class="bi bi-file-text me-2"></i>
+                        {{ truncarTexto(tarefa.descricao) }}
+                    </p>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted mb-1">Tempo Gasto</h6>
+                        <p class="mb-0 fw-medium">
+                            <i class="bi bi-clock me-2"></i>
+                            {{ formatarTempo(tarefa.tempoGastoMinutos) }}
+                        </p>
+                    </div>
+                    <div class="text-end">
+                        <i class="bi bi-stopwatch-fill text-info fs-4"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer bg-light border-0 rounded-bottom-4 p-3">
+                <div class="d-grid gap-2">
+                    <button
+                            (click)="editar(tarefa)"
+                            class="btn btn-outline-info btn-sm fw-medium">
+                        <i class="bi bi-pencil me-1"></i>
+                        Editar
+                    </button>
+                    <button
+                            (click)="excluir(tarefa.id!)"
+                            class="btn btn-outline-danger btn-sm fw-medium">
+                        <i class="bi bi-trash me-1"></i>
+                        Excluir
+                    </button>
+                </div>
             </div>
         </div>
     </div>
