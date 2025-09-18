@@ -1,27 +1,27 @@
-<div class="matricula-form">
-    <h3>Nova Matrícula</h3>
+<div class="container">
+    <h3 class="mb-3">Nova Matrícula</h3>
 
     <form (ngSubmit)="salvar()">
-        <div class="form-group">
-            <label>Estudante:</label>
-            <div class="user-info">
+        <div class="mb-3">
+            <label class="form-label">Estudante:</label>
+            <div class="form-control-plaintext">
                 {{ authService.getNomeUsuario() }}
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="curso">Curso:</label>
-            <select [(ngModel)]="matriculaRequest.cursoId" id="curso" name="cursoId" required>
+        <div class="mb-3">
+            <label class="form-label" for="curso">Curso:</label>
+            <select [(ngModel)]="matriculaRequest.cursoId" class="form-select" id="curso" name="cursoId" required>
                 <option value="0">Selecione um curso</option>
                 <option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nome }}</option>
             </select>
         </div>
 
-        <div class="form-actions">
-            <button class="btn-primary" type="submit">
+        <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" type="submit">
                 Matricular
             </button>
-            <button (click)="resetarFormulario()" class="btn-secondary" type="button">
+            <button (click)="resetarFormulario()" class="btn btn-secondary" type="button">
                 Limpar
             </button>
         </div>

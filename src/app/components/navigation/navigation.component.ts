@@ -10,7 +10,7 @@ import {Subscription} from 'rxjs';
     standalone: true,
     imports: [CommonModule, RouterModule],
     templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.css']
+
 })
 export class NavigationComponent implements OnInit, OnDestroy {
     title = 'ACT LMS';

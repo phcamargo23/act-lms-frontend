@@ -9,7 +9,7 @@ import {Curso} from '../../models/curso.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-list.component.html',
-    styleUrl: './curso-list.component.css'
+
 })
 export class CursoListComponent implements OnInit {
     @Input() cursos: Curso[] = [];

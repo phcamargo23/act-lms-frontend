@@ -10,7 +10,7 @@ import {TarefaService} from '../../services/tarefa.service';
     standalone: true,
     imports: [CommonModule, TarefaFormComponent, TarefaListComponent],
     templateUrl: './tarefas.component.html',
-    styleUrls: ['./tarefas.component.css']
+
 })
 export class TarefasComponent implements OnInit {
     tarefas: Tarefa[] = [];

@@ -1,20 +1,28 @@
-<div class="tarefas-page">
-    <h1>Gerenciar Tarefas</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Gerenciar Tarefas</h1>
 
-    <section class="section">
-        <h2>{{ tarefaParaEdicao ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
-        <app-tarefa-form
-                (tarefaSalva)="onTarefaSalva($event)"
-                [tarefa]="tarefaParaEdicao">
-        </app-tarefa-form>
-    </section>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">{{ tarefaParaEdicao ? 'Editar Tarefa' : 'Nova Tarefa' }}</h2>
+        </div>
+        <div class="card-body">
+            <app-tarefa-form
+                    (tarefaSalva)="onTarefaSalva($event)"
+                    [tarefa]="tarefaParaEdicao">
+            </app-tarefa-form>
+        </div>
+    </div>
 
-    <section class="section">
-        <h2>Lista de Tarefas</h2>
-        <app-tarefa-list
-                (tarefaEditada)="onTarefaEditada($event)"
-                (tarefaExcluida)="onTarefaExcluida($event)"
-                [tarefas]="tarefas">
-        </app-tarefa-list>
-    </section>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Lista de Tarefas</h2>
+        </div>
+        <div class="card-body">
+            <app-tarefa-list
+                    (tarefaEditada)="onTarefaEditada($event)"
+                    (tarefaExcluida)="onTarefaExcluida($event)"
+                    [tarefas]="tarefas">
+            </app-tarefa-list>
+        </div>
+    </div>
 </div>

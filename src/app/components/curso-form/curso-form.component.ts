@@ -9,7 +9,7 @@ import {Curso} from '../../models/curso.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-form.component.html',
-    styleUrl: './curso-form.component.css'
+
 })
 export class CursoFormComponent implements OnInit, OnChanges {
     @Input() curso?: Curso;

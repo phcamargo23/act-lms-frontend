@@ -8,7 +8,7 @@ import {TarefaService} from '../../services/tarefa.service';
     standalone: true,
     imports: [CommonModule],
     templateUrl: './tarefa-list.component.html',
-    styleUrls: ['./tarefa-list.component.css']
+
 })
 export class TarefaListComponent {
     @Input() tarefas: Tarefa[] = [];

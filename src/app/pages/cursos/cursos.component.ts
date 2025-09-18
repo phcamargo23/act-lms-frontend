@@ -10,7 +10,7 @@ import {CursoService} from '../../services/curso.service';
     standalone: true,
     imports: [CommonModule, CursoFormComponent, CursoListComponent],
     templateUrl: './cursos.component.html',
-    styleUrls: ['./cursos.component.css']
+
 })
 export class CursosComponent implements OnInit {
     cursos: Curso[] = [];

@@ -1,25 +1,33 @@
-<div class="cursos-page">
-    <h1>Gerenciar Cursos</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Gerenciar Cursos</h1>
 
-    <section class="section">
-        <h2>Adicionar/Editar Curso</h2>
-        <app-curso-form
-                (cursoSalvo)="onCursoSalvo($event)"
-                [curso]="cursoEditando">
-        </app-curso-form>
-
-        <!-- Debug info -->
-        <div *ngIf="cursoEditando" style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px;">
-            <strong>Debug:</strong> Editando curso: {{ cursoEditando.nome }} (ID: {{ cursoEditando.id }})
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Adicionar/Editar Curso</h2>
         </div>
-    </section>
+        <div class="card-body">
+            <app-curso-form
+                    (cursoSalvo)="onCursoSalvo($event)"
+                    [curso]="cursoEditando">
+            </app-curso-form>
 
-    <section class="section">
-        <h2>Lista de Cursos</h2>
-        <app-curso-list
-                (cursoDeletado)="onCursoDeletado($event)"
-                (editarCurso)="onEditarCurso($event)"
-                [cursos]="cursos">
-        </app-curso-list>
-    </section>
+            <!-- Debug info -->
+            <div *ngIf="cursoEditando" class="alert alert-secondary mt-3">
+                <strong>Debug:</strong> Editando curso: {{ cursoEditando.nome }} (ID: {{ cursoEditando.id }})
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Lista de Cursos</h2>
+        </div>
+        <div class="card-body">
+            <app-curso-list
+                    (cursoDeletado)="onCursoDeletado($event)"
+                    (editarCurso)="onEditarCurso($event)"
+                    [cursos]="cursos">
+            </app-curso-list>
+        </div>
+    </div>
 </div>

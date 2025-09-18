@@ -1,18 +1,26 @@
-<div class="matriculas-page">
-    <h1>Gerenciar Matrículas</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Gerenciar Matrículas</h1>
 
-    <section class="section">
-        <h2>Nova Matrícula</h2>
-        <app-matricula-form
-                (matriculaSalva)="onMatriculaSalva($event)">
-        </app-matricula-form>
-    </section>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Nova Matrícula</h2>
+        </div>
+        <div class="card-body">
+            <app-matricula-form
+                    (matriculaSalva)="onMatriculaSalva($event)">
+            </app-matricula-form>
+        </div>
+    </div>
 
-    <section class="section">
-        <h2>Minhas Matrículas</h2>
-        <app-matricula-list
-                (matriculaCancelada)="onMatriculaCancelada($event)"
-                [matriculas]="matriculas">
-        </app-matricula-list>
-    </section>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h2 class="card-title mb-0">Minhas Matrículas</h2>
+        </div>
+        <div class="card-body">
+            <app-matricula-list
+                    (matriculaCancelada)="onMatriculaCancelada($event)"
+                    [matriculas]="matriculas">
+            </app-matricula-list>
+        </div>
+    </div>
 </div>

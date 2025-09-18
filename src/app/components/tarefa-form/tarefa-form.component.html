@@ -1,10 +1,10 @@
-<div class="tarefa-form">
-    <h3>{{ tarefa ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
+<div class="container">
+    <h3 class="mb-3">{{ tarefa ? 'Editar Tarefa' : 'Nova Tarefa' }}</h3>
 
     <form (ngSubmit)="salvar()">
-        <div class="form-group">
-            <label for="matricula">Matrícula:</label>
-            <select [(ngModel)]="tarefaRequest.matriculaId" id="matricula" name="matriculaId" required>
+        <div class="mb-3">
+            <label class="form-label" for="matricula">Matrícula:</label>
+            <select [(ngModel)]="tarefaRequest.matriculaId" class="form-select" id="matricula" name="matriculaId" required>
                 <option value="0">Selecione uma matrícula</option>
                 <option *ngFor="let matricula of matriculas" [value]="matricula.id">
                     {{ matricula.usuarioNome }} - {{ matricula.cursoNome }}
@@ -12,9 +12,9 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="categoria">Categoria:</label>
-            <select [(ngModel)]="tarefaRequest.categoriaId" id="categoria" name="categoriaId" required>
+        <div class="mb-3">
+            <label class="form-label" for="categoria">Categoria:</label>
+            <select [(ngModel)]="tarefaRequest.categoriaId" class="form-select" id="categoria" name="categoriaId" required>
                 <option value="0">Selecione uma categoria</option>
                 <option *ngFor="let categoria of categorias" [value]="categoria.id">
                     {{ categoria.tipo }}
@@ -22,20 +22,22 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label for="dataTarefa">Data da Tarefa:</label>
+        <div class="mb-3">
+            <label class="form-label" for="dataTarefa">Data da Tarefa:</label>
             <input
                     [(ngModel)]="tarefaRequest.dataTarefa"
+                    class="form-control"
                     id="dataTarefa"
                     name="dataTarefa"
                     required
                     type="date">
         </div>
 
-        <div class="form-group">
-            <label for="descricao">Descrição:</label>
+        <div class="mb-3">
+            <label class="form-label" for="descricao">Descrição:</label>
             <textarea
                     [(ngModel)]="tarefaRequest.descricao"
+                    class="form-control"
                     id="descricao"
                     name="descricao"
                     placeholder="Descreva a tarefa realizada..."
@@ -43,10 +45,11 @@
             </textarea>
         </div>
 
-        <div class="form-group">
-            <label for="tempoGasto">Tempo Gasto (minutos):</label>
+        <div class="mb-3">
+            <label class="form-label" for="tempoGasto">Tempo Gasto (minutos):</label>
             <input
                     [(ngModel)]="tarefaRequest.tempoGastoMinutos"
+                    class="form-control"
                     id="tempoGasto"
                     min="0"
                     name="tempoGastoMinutos"
@@ -54,11 +57,11 @@
                     type="number">
         </div>
 
-        <div class="form-actions">
-            <button class="btn-primary" type="submit">
+        <div class="d-grid gap-2 mt-3">
+            <button class="btn btn-primary" type="submit">
                 {{ tarefa ? 'Atualizar' : 'Salvar' }}
             </button>
-            <button (click)="resetarFormulario()" class="btn-secondary" type="button">
+            <button (click)="resetarFormulario()" class="btn btn-secondary" type="button">
                 Limpar
             </button>
         </div>

@@ -1,34 +1,36 @@
-<div class="tarefas-list">
-    <h3>Tarefas</h3>
+<div class="container mt-4">
+    <h3 class="mb-3">Tarefas</h3>
 
-    <div *ngIf="tarefas.length === 0" class="no-tarefas">
+    <div *ngIf="tarefas.length === 0" class="alert alert-info">
         <p>Nenhuma tarefa encontrada.</p>
     </div>
 
-    <div *ngIf="tarefas.length > 0" class="tarefas-container">
-        <div *ngFor="let tarefa of tarefas" class="tarefa-item">
-            <div class="tarefa-header">
-                <h4>{{ formatarData(tarefa.dataTarefa) }}</h4>
-                <span class="categoria-badge">{{ tarefa.categoriaNome }}</span>
-            </div>
-
-            <div class="tarefa-content">
-                <p class="usuario-info">
-                    <strong>👤</strong> {{ tarefa.matriculaUsuarioNome }}
-                </p>
-
-                <div *ngIf="tarefa.descricao" class="descricao">
-                    <strong>📝</strong> {{ truncarTexto(tarefa.descricao) }}
+    <div *ngIf="tarefas.length > 0" class="row">
+        <div *ngFor="let tarefa of tarefas" class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4>{{ formatarData(tarefa.dataTarefa) }}</h4>
+                    <span class="badge bg-primary">{{ tarefa.categoriaNome }}</span>
                 </div>
 
-                <div class="tempo-info">
-                    <strong>⏱️</strong> {{ formatarTempo(tarefa.tempoGastoMinutos) }}
-                </div>
-            </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>👤</strong> {{ tarefa.matriculaUsuarioNome }}
+                    </p>
 
-            <div class="tarefa-actions">
-                <button (click)="editar(tarefa)" class="btn-edit">✏️ Editar</button>
-                <button (click)="excluir(tarefa.id!)" class="btn-delete">🗑️ Excluir</button>
+                    <div *ngIf="tarefa.descricao" class="mb-2">
+                        <strong>📝</strong> {{ truncarTexto(tarefa.descricao) }}
+                    </div>
+
+                    <div class="mb-2">
+                        <strong>⏱️</strong> {{ formatarTempo(tarefa.tempoGastoMinutos) }}
+                    </div>
+                </div>
+
+                <div class="card-footer text-end">
+                    <button (click)="editar(tarefa)" class="btn btn-sm btn-info me-2">✏️ Editar</button>
+                    <button (click)="excluir(tarefa.id!)" class="btn btn-sm btn-danger">🗑️ Excluir</button>
+                </div>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ import {AuthService} from '../../services/auth.service';
     standalone: true,
     imports: [CommonModule, MatriculaFormComponent, MatriculaListComponent],
     templateUrl: './matriculas.component.html',
-    styleUrls: ['./matriculas.component.css']
+
 })
 export class MatriculasComponent implements OnInit {
     matriculas: Matricula[] = [];
