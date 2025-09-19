@@ -1,11 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
 import {Matricula, MatriculaRequest} from '../../models/matricula.model';
 import {MatriculaService} from '../../services/matricula.service';
 import {CursoService} from '../../services/curso.service';
 import {AuthService} from '../../services/auth.service';
 import {Curso} from '../../models/curso.model';
+import {ApiErrorResponse} from '../../models/usuario.model';
 
 @Component({
     selector: 'app-matricula-form',
@@ -24,6 +26,12 @@ export class MatriculaFormComponent implements OnInit {
     };
 
     cursos: Curso[] = [];
+
+    // Estados do componente
+    isLoading = false;
+    isSuccess = false;
+    errorMessage = '';
+    successMessage = '';
 
     constructor(
         private matriculaService: MatriculaService,
@@ -56,9 +64,22 @@ export class MatriculaFormComponent implements OnInit {
     }
 
     salvar() {
-        this.matriculaService.criarMatricula(this.matriculaRequest).subscribe(matricula => {
-            this.matriculaSalva.emit(matricula);
-            this.resetarFormulario();
+        // Reset estados anteriores
+        this.resetStates();
+        this.isLoading = true;
+
+        this.matriculaService.criarMatricula(this.matriculaRequest).subscribe({
+            next: (matricula) => {
+                this.isLoading = false;
+                this.isSuccess = true;
+                this.successMessage = 'Matrícula realizada com sucesso!';
+                this.matriculaSalva.emit(matricula);
+                this.resetarFormulario();
+            },
+            error: (error: HttpErrorResponse) => {
+                this.isLoading = false;
+                this.handleError(error);
+            }
         });
     }
 
@@ -67,5 +88,25 @@ export class MatriculaFormComponent implements OnInit {
             usuarioId: this.authService.getUsuarioLogado()?.id || 0,
             cursoId: 0
         };
+        this.resetStates();
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        console.error('Erro ao criar matrícula:', error);
+
+        if (error.status === 400 && error.error) {
+            const apiError: ApiErrorResponse = error.error;
+            this.errorMessage = apiError.message || 'Erro ao criar matrícula.';
+        } else {
+            // Erro de conexão ou servidor
+            this.errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
+        }
+    }
+
+    private resetStates() {
+        this.isLoading = false;
+        this.isSuccess = false;
+        this.errorMessage = '';
+        this.successMessage = '';
     }
 }

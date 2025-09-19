@@ -1,4 +1,20 @@
-<app-matricula-create
-        (cancelar)="onCancelar()"
-        (matriculaSalva)="onMatriculaSalva($event)">
-</app-matricula-create>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Nova Matrícula</h4>
+                </div>
+                <div class="card-body">
+                    <app-matricula-form (matriculaSalva)="onMatriculaSalva($event)"></app-matricula-form>
+                </div>
+                <div class="card-footer bg-light">
+                    <button (click)="onCancelar()" class="btn btn-secondary">
+                        <i class="bi bi-x-circle me-2"></i>
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
