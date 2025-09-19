@@ -1,3 +1,4 @@
+<!-- Estado vazio quando não há cursos -->
 <div *ngIf="cursos.length === 0" class="text-center py-5">
     <div class="card border-0 shadow-sm">
         <div class="card-body p-5">
@@ -8,46 +9,56 @@
     </div>
 </div>
 
-<div *ngIf="cursos.length > 0" class="row g-4">
-    <div *ngFor="let curso of cursos" class="col-12 col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm border-0 rounded-4 hover-shadow">
-            <div class="card-header bg-primary text-white py-3 rounded-top-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">
-                        <i class="bi bi-book me-2"></i>
-                        {{ curso.nome }}
-                    </h5>
-                    <span class="badge bg-light text-primary fw-medium">ID: {{ curso.id }}</span>
+<!-- Tabela de cursos -->
+<div *ngIf="cursos.length > 0" class="table-responsive">
+    <table class="table table-hover table-striped">
+        <thead class="table-primary">
+        <tr>
+            <th class="text-center" scope="col">
+                <i class="bi bi-hash me-1"></i>
+                ID
+            </th>
+            <th scope="col">
+                <i class="bi bi-book me-1"></i>
+                Nome do Curso
+            </th>
+            <th class="text-center" scope="col">
+                <i class="bi bi-gear me-1"></i>
+                Ações
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let curso of cursos">
+            <td class="text-center">
+                <span class="badge bg-primary fw-medium">{{ curso.id }}</span>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-mortarboard-fill text-primary me-2"></i>
+                    <span class="fw-medium">{{ curso.nome }}</span>
                 </div>
-            </div>
-            <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h6 class="text-muted mb-1">Curso</h6>
-                        <p class="mb-0 fw-medium">{{ curso.nome }}</p>
-                    </div>
-                    <div class="text-end">
-                        <i class="bi bi-mortarboard-fill text-primary fs-4"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer bg-light border-0 rounded-bottom-4 p-3">
-                <div class="d-grid gap-2">
+            </td>
+            <td class="text-center">
+                <div class="btn-group" role="group">
                     <button
                             (click)="editarCursoClick(curso)"
-                            class="btn btn-outline-primary btn-sm fw-medium">
-                        <i class="bi bi-pencil me-1"></i>
-                        Editar
+                            class="btn btn-outline-primary btn-sm"
+                            title="Editar curso">
+                        <i class="bi bi-pencil"></i>
+                        Editar curso
                     </button>
                     <button
                             (click)="deletarCursoClick(curso.id!)"
-                            class="btn btn-outline-danger btn-sm fw-medium">
-                        <i class="bi bi-trash me-1"></i>
-                        Deletar
+                            class="btn btn-outline-danger btn-sm"
+                            title="Deletar curso">
+                        <i class="bi bi-trash"></i>
+                        Deletar curso
                     </button>
                 </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
