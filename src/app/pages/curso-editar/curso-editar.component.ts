@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
-import {CursoEditComponent} from '../../components/curso-edit/curso-edit.component';
+import {CursoFormComponent} from '../../components/curso-form/curso-form.component';
 import {Curso} from '../../models/curso.model';
 import {CursoService} from '../../services/curso.service';
 
 @Component({
     selector: 'app-curso-editar',
     standalone: true,
-    imports: [CommonModule, CursoEditComponent],
+    imports: [CommonModule, CursoFormComponent],
     templateUrl: './curso-editar.component.html',
 })
 export class CursoEditarComponent implements OnInit {

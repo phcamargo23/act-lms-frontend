@@ -9,12 +9,12 @@ import {Curso} from '../../models/curso.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-list.component.html',
-
 })
 export class CursoListComponent implements OnInit {
     @Input() cursos: Curso[] = [];
     @Output() editarCurso = new EventEmitter<Curso>();
     @Output() cursoDeletado = new EventEmitter<number>();
+    @Output() novoCurso = new EventEmitter<void>();
 
     constructor(private cursoService: CursoService) {
     }
@@ -48,4 +48,7 @@ export class CursoListComponent implements OnInit {
         }
     }
 
+    novoCursoClick() {
+        this.novoCurso.emit();
+    }
 }

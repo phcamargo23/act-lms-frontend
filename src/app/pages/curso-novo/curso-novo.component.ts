@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {CursoEditComponent} from '../../components/curso-edit/curso-edit.component';
+import {CursoFormComponent} from '../../components/curso-form/curso-form.component';
 import {Curso} from '../../models/curso.model';
 
 @Component({
     selector: 'app-curso-novo',
     standalone: true,
-    imports: [CommonModule, CursoEditComponent],
+    imports: [CommonModule, CursoFormComponent],
     templateUrl: './curso-novo.component.html',
 })
 export class CursoNovoComponent {

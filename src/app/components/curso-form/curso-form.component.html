@@ -1,3 +1,10 @@
+<!-- Mensagens de feedback -->
+<div *ngIf="erro" class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    {{ erro }}
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+</div>
+
 <form #cursoFormRef="ngForm" (ngSubmit)="salvar()">
     <div class="mb-4">
         <label class="form-label fw-medium text-dark" for="nome">
@@ -21,24 +28,20 @@
 
     <div class="d-grid gap-3 mt-4">
         <button
-                [disabled]="!cursoFormRef.form.valid"
+                [disabled]="!cursoFormRef.form.valid || carregando"
                 class="btn btn-primary btn-lg fw-medium py-2"
                 type="submit">
-            <i class="bi bi-check-circle me-2"></i>
-            {{ isEditando ? 'Atualizar Curso' : 'Criar Curso' }}
+            <span *ngIf="carregando" aria-hidden="true" class="spinner-border spinner-border-sm me-2" role="status"></span>
+            <i *ngIf="!carregando" class="bi bi-check-circle me-2"></i>
+            {{ carregando ? 'Salvando...' : (isEditando ? 'Atualizar Curso' : 'Criar Curso') }}
         </button>
         <button
-                (click)="resetarFormulario()"
+                (click)="cancelarEdicao()"
+                [disabled]="carregando"
                 class="btn btn-outline-secondary fw-medium"
                 type="button">
-            <i class="bi bi-x-circle me-2"></i>
-            Cancelar
+            <i class="bi bi-arrow-left me-2"></i>
+            Voltar para Lista
         </button>
     </div>
 </form>
-
-<div *ngIf="erro" class="alert alert-danger mt-4 border-0 rounded-3">
-    <i class="bi bi-exclamation-triangle me-2"></i>
-    {{ erro }}
-</div>
-

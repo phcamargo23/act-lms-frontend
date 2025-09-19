@@ -9,11 +9,11 @@ import {Curso} from '../../models/curso.model';
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-form.component.html',
-
 })
 export class CursoFormComponent implements OnInit, OnChanges {
     @Input() curso?: Curso;
     @Output() cursoSalvo = new EventEmitter<Curso>();
+    @Output() cancelar = new EventEmitter<void>();
 
     cursoId?: number;
 
@@ -23,6 +23,7 @@ export class CursoFormComponent implements OnInit, OnChanges {
 
     isEditando = false;
     erro = '';
+    carregando = false;
 
     constructor(private cursoService: CursoService) {
     }
@@ -52,9 +53,11 @@ export class CursoFormComponent implements OnInit, OnChanges {
 
     salvar() {
         this.erro = '';
+        this.carregando = true;
 
         if (!this.isFormValid()) {
             this.erro = 'Por favor, preencha todos os campos obrigatórios';
+            this.carregando = false;
             return;
         }
 
@@ -65,10 +68,12 @@ export class CursoFormComponent implements OnInit, OnChanges {
                     console.log('Curso atualizado com sucesso:', curso);
                     this.cursoSalvo.emit(curso);
                     this.resetarFormulario();
+                    this.carregando = false;
                 },
                 error: (error) => {
                     this.erro = 'Erro ao atualizar curso';
                     console.error('Erro ao atualizar curso:', error);
+                    this.carregando = false;
                 }
             });
         } else {
@@ -76,10 +81,12 @@ export class CursoFormComponent implements OnInit, OnChanges {
                 next: (curso) => {
                     this.cursoSalvo.emit(curso);
                     this.resetarFormulario();
+                    this.carregando = false;
                 },
                 error: (error) => {
                     this.erro = 'Erro ao criar curso';
                     console.error('Erro ao criar curso:', error);
+                    this.carregando = false;
                 }
             });
         }
@@ -89,9 +96,15 @@ export class CursoFormComponent implements OnInit, OnChanges {
         this.cursoForm = {nome: ''};
         this.isEditando = false;
         this.cursoId = undefined;
+        this.erro = '';
+    }
+
+    cancelarEdicao() {
+        this.resetarFormulario();
+        this.cancelar.emit();
     }
 
     isFormValid(): boolean {
-        return !!this.cursoForm.nome;
+        return !!this.cursoForm.nome?.trim();
     }
 }

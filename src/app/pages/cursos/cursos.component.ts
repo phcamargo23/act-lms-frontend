@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {CursoTableComponent} from '../../components/curso-table/curso-table.component';
+import {CursoListComponent} from '../../components/curso-list/curso-list.component';
 import {Curso} from '../../models/curso.model';
 import {CursoService} from '../../services/curso.service';
 
 @Component({
     selector: 'app-cursos',
     standalone: true,
-    imports: [CommonModule, CursoTableComponent],
+    imports: [CommonModule, CursoListComponent],
     templateUrl: './cursos.component.html',
 })
 export class CursosComponent implements OnInit {
