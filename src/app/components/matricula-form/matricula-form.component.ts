@@ -6,7 +6,7 @@ import {Matricula, MatriculaRequest} from '../../models/matricula.model';
 import {MatriculaService} from '../../services/matricula.service';
 import {CursoService} from '../../services/curso.service';
 import {AuthService} from '../../services/auth.service';
-import {Curso} from '../../models/curso.model';
+import {CursoResponse} from '../../models/curso.model';
 import {ApiErrorResponse} from '../../models/usuario.model';
 
 @Component({
@@ -25,7 +25,7 @@ export class MatriculaFormComponent implements OnInit {
         cursoId: 0
     };
 
-    cursos: Curso[] = [];
+    cursos: CursoResponse[] = [];
 
     // Estados do componente
     isLoading = false;

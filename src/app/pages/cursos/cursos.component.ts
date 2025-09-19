@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {CursoListComponent} from '../../components/curso-list/curso-list.component';
-import {Curso} from '../../models/curso.model';
+import {CursoResponse} from '../../models/curso.model';
 import {CursoService} from '../../services/curso.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {CursoService} from '../../services/curso.service';
     templateUrl: './cursos.component.html',
 })
 export class CursosComponent implements OnInit {
-    cursos: Curso[] = [];
+    cursos: CursoResponse[] = [];
 
     constructor(
         private cursoService: CursoService,
@@ -30,7 +30,7 @@ export class CursosComponent implements OnInit {
         });
     }
 
-    onEditarCurso(curso: Curso) {
+    onEditarCurso(curso: CursoResponse) {
         console.log('Editando curso:', curso);
         this.router.navigate(['/cursos/editar'], {
             queryParams: {id: curso.id}

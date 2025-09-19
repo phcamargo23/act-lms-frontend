@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Curso} from '../models/curso.model';
+import {CursoRequest, CursoResponse} from '../models/curso.model';
 
 @Injectable({
     providedIn: 'root'
@@ -12,21 +12,20 @@ export class CursoService {
     constructor(private http: HttpClient) {
     }
 
-    listarCursos(): Observable<Curso[]> {
-        return this.http.get<Curso[]>(this.apiUrl);
+    listarCursos(): Observable<CursoResponse[]> {
+        return this.http.get<CursoResponse[]>(this.apiUrl);
     }
 
-
-    buscarCurso(id: number): Observable<Curso> {
-        return this.http.get<Curso>(`${this.apiUrl}/${id}`);
+    buscarCurso(id: number): Observable<CursoResponse> {
+        return this.http.get<CursoResponse>(`${this.apiUrl}/${id}`);
     }
 
-    criarCurso(curso: Curso): Observable<Curso> {
-        return this.http.post<Curso>(this.apiUrl, curso);
+    criarCurso(curso: CursoRequest): Observable<CursoResponse> {
+        return this.http.post<CursoResponse>(this.apiUrl, curso);
     }
 
-    atualizarCurso(id: number, curso: Curso): Observable<Curso> {
-        return this.http.put<Curso>(`${this.apiUrl}/${id}`, curso);
+    atualizarCurso(id: number, curso: CursoRequest): Observable<CursoResponse> {
+        return this.http.put<CursoResponse>(`${this.apiUrl}/${id}`, curso);
     }
 
     deletarCurso(id: number): Observable<void> {

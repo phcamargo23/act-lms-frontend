@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CursoFormComponent} from '../../components/curso-form/curso-form.component';
-import {Curso} from '../../models/curso.model';
+import {Curso, CursoResponse} from '../../models/curso.model';
 import {CursoService} from '../../services/curso.service';
 
 @Component({
@@ -47,7 +47,7 @@ export class CursoEditarComponent implements OnInit {
         });
     }
 
-    onCursoSalvo(curso: Curso) {
+    onCursoSalvo(curso: CursoResponse) {
         console.log('Curso salvo:', curso);
         this.router.navigate(['/cursos']);
     }

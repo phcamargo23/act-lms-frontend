@@ -5,7 +5,7 @@ import {MatriculaService} from '../../services/matricula.service';
 import {CursoService} from '../../services/curso.service';
 import {AuthService} from '../../services/auth.service';
 import {Matricula, MatriculaRequest} from '../../models/matricula.model';
-import {Curso} from '../../models/curso.model';
+import {CursoResponse} from '../../models/curso.model';
 
 @Component({
     selector: 'app-matricula-create',
@@ -22,7 +22,7 @@ export class MatriculaCreateComponent implements OnInit {
         cursoId: 0
     };
 
-    cursos: Curso[] = [];
+    cursos: CursoResponse[] = [];
     erro = '';
     carregando = false;
 
