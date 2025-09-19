@@ -2,9 +2,9 @@
 
 Frontend do Sistema de Gerenciamento de Aprendizado (LMS) desenvolvido para a ACT.
 
-## 🚨 Atenção
-
-- **Usuário Administrador padrão**: `admin@exemplo.com` / `123` (já que apenas estudantes podem se inscrever nos cursos através do sistema)
+## 🚨 Informações Preliminares
+- **Documentação geral**: Para informações detalhadas sobre requisitos, especificações e evolução do projeto, consulte a **[Documentação Geral do Projeto](https://evolker.notion.site/LMS-Act-2729966e643e8006aa1ed5edcc2ce275?source=copy_link)**.
+- **Usuário Administrador padrão**: foi criado o usuário/senha `admin@exemplo.com` / `123` (já que apenas estudantes podem se inscrever nos cursos através do sistema)
 
 ## 📋 Informações do Projeto
 
@@ -82,6 +82,10 @@ act-lms-frontend/
 ## 🔗 Integração com Backend
 
 O frontend consome a API REST do backend Java Spring Boot que deve estar rodando em `http://localhost:8080`.
+
+## 🌿 DevOps
+- Este projeto utiliza o **Git Flow** como estratégia de branching.
+
 
 ## 📚 Architecture Decision Records (ADRs)
 
