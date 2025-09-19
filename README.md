@@ -1,10 +1,10 @@
 # ACT LMS Frontend - Angular Application
 
-Frontend do Sistema de Gerenciamento de Aprendizado (LMS) desenvolvido para a ACT (Associação de Ciência e Tecnologia).
+Frontend do Sistema de Gerenciamento de Aprendizado (LMS) desenvolvido para a ACT.
 
 ## 🚨 Atenção
 
-- **Usuário Administrador padrão**: `admin@exemplo.com` / `123` (já que penas estudantes podem se inscrever** nos cursos através do sistema)
+- **Usuário Administrador padrão**: `admin@exemplo.com` / `123` (já que apenas estudantes podem se inscrever nos cursos através do sistema)
 
 ## 📋 Informações do Projeto
 
