@@ -2,19 +2,19 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CursoService} from '../../services/curso.service';
-import {Curso} from '../../models/curso.model';
+import {CursoResponse} from '../../models/curso.model';
 
 @Component({
     selector: 'app-curso-list',
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-list.component.html',
-    styleUrl: './curso-list.component.css'
 })
 export class CursoListComponent implements OnInit {
-    @Input() cursos: Curso[] = [];
-    @Output() editarCurso = new EventEmitter<Curso>();
+    @Input() cursos: CursoResponse[] = [];
+    @Output() editarCurso = new EventEmitter<CursoResponse>();
     @Output() cursoDeletado = new EventEmitter<number>();
+    @Output() novoCurso = new EventEmitter<void>();
 
     constructor(private cursoService: CursoService) {
     }
@@ -32,7 +32,7 @@ export class CursoListComponent implements OnInit {
         });
     }
 
-    editarCursoClick(curso: Curso) {
+    editarCursoClick(curso: CursoResponse) {
         console.log('Clicou em editar curso:', curso);
         this.editarCurso.emit(curso);
     }
@@ -48,4 +48,7 @@ export class CursoListComponent implements OnInit {
         }
     }
 
+    novoCursoClick() {
+        this.novoCurso.emit();
+    }
 }

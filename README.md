@@ -1,59 +1,98 @@
-# ActLms
+# ACT LMS Frontend - Angular Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+Frontend do Sistema de Gerenciamento de Aprendizado (LMS) desenvolvido para a ACT.
 
-## Development server
+## 🚨 Informações Preliminares
+- **Documentação geral**: Para informações detalhadas sobre requisitos, especificações e evolução do projeto, consulte a **[Documentação Geral do Projeto](https://evolker.notion.site/LMS-Act-2729966e643e8006aa1ed5edcc2ce275?source=copy_link)**.
+- **Usuário Administrador padrão**: foi criado o usuário/senha `admin@exemplo.com` / `123` (já que apenas estudantes podem se inscrever nos cursos através do sistema)
 
-To start a local development server, run:
+## 📋 Informações do Projeto
+
+- **Framework**: Angular 19.0.0
+- **Node.js**: Versão compatível com Angular 19
+- **UI Framework**: Bootstrap 5.3.8
+- **TypeScript**: 5.7.2
+- **Angular CLI**: 19.0.0
+
+## 🚀 Configuração e Execução
+
+### Pré-requisitos
+
+- Node.js instalado (versão compatível com Angular 19)
+- npm ou yarn instalado
+
+### Instalação
+
+Instale as dependências:
+
+```bash
+npm install
+```
+
+### Execução
+
+#### Modo Desenvolvimento
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A aplicação estará disponível em `http://localhost:4200/` e será recarregada automaticamente quando você modificar os arquivos.
 
-## Code scaffolding
+## 🎨 Tecnologias e Bibliotecas
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Core
 
-```bash
-ng generate component component-name
+- **Angular 19**: Framework principal
+- **TypeScript 5.7.2**: Linguagem de programação
+- **RxJS 7.8.0**: Programação reativa
+
+### UI/UX
+
+- **Bootstrap 5.3.8**: Framework CSS para interface
+- **Angular Forms**: Gerenciamento de formulários
+- **Angular Router**: Roteamento da aplicação
+
+### Desenvolvimento
+
+- **Angular CLI 19**: Ferramentas de linha de comando
+- **Angular Build**: Sistema de build
+- **Prettier**: Formatação de código
+
+## 📁 Estrutura do Projeto
+
+```
+act-lms-frontend/
+├── src/
+│   ├── app/                   # Código da aplicação
+│   │   ├── components/        # Componentes Angular
+│   │   ├── services/          # Serviços Angular
+│   │   ├── models/            # Interfaces e modelos TypeScript
+│   │   └── app.component.*    # Componente raiz
+│   ├── assets/                # Recursos estáticos
+│   ├── environments/          # Configurações de ambiente
+│   └── styles/                # Estilos globais
+├── docs/                      # Documentação (ADRs)
+├── public/                    # Arquivos públicos
+├── angular.json               # Configuração do Angular CLI
+├── package.json               # Dependências e scripts
+└── tsconfig.json              # Configuração do TypeScript
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🔗 Integração com Backend
 
-```bash
-ng generate --help
-```
+O frontend consome a API REST do backend Java Spring Boot que deve estar rodando em `http://localhost:8080`.
 
-## Building
+## 🌿 DevOps
+- Este projeto utiliza o **Git Flow** como estratégia de branching.
 
-To build the project run:
 
-```bash
-ng build
-```
+## 📚 Architecture Decision Records (ADRs)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Este projeto utiliza ADRs para documentar decisões arquiteturais importantes tomadas durante o desenvolvimento.
 
-## Running unit tests
+### Índice de ADRs
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| ADR                                                    | Título                                               | Status | Data          |
+|--------------------------------------------------------|------------------------------------------------------|--------|---------------|
+| [ADR-001](./docs/adr-001-bootstrap-native-decision.md) | Decisão de usar Bootstrap nativo ao invés de PrimeNG | Aceito | Setembro 2025 |

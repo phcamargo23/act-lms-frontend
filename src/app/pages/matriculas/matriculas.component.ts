@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatriculaFormComponent} from '../../components/matricula-form/matricula-form.component';
+import {Router} from '@angular/router';
 import {MatriculaListComponent} from '../../components/matricula-list/matricula-list.component';
 import {Matricula} from '../../models/matricula.model';
 import {MatriculaService} from '../../services/matricula.service';
@@ -9,16 +9,16 @@ import {AuthService} from '../../services/auth.service';
 @Component({
     selector: 'app-matriculas',
     standalone: true,
-    imports: [CommonModule, MatriculaFormComponent, MatriculaListComponent],
+    imports: [CommonModule, MatriculaListComponent],
     templateUrl: './matriculas.component.html',
-    styleUrls: ['./matriculas.component.css']
 })
 export class MatriculasComponent implements OnInit {
     matriculas: Matricula[] = [];
 
     constructor(
         private matriculaService: MatriculaService,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     ) {
     }
 
@@ -35,8 +35,9 @@ export class MatriculasComponent implements OnInit {
         }
     }
 
-    onMatriculaSalva(matricula: Matricula) {
-        this.matriculas.push(matricula);
+    onNovaMatricula() {
+        console.log('Criando nova matrícula');
+        this.router.navigate(['/matriculas/nova']);
     }
 
     onMatriculaCancelada(id: number) {

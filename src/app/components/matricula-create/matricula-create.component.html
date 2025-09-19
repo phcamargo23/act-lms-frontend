@@ -1,0 +1,113 @@
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-8">
+            <!-- Header Section -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">
+                    <i class="bi bi-person-plus me-3"></i>
+                    Nova Matrícula
+                </h1>
+                <p class="lead text-muted">Inscreva-se em um curso do sistema</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-success text-white py-4 rounded-top-4">
+                    <h2 class="card-title mb-0 fw-bold text-center">
+                        <i class="bi bi-person-lines-fill me-2"></i>
+                        Realizar Matrícula
+                    </h2>
+                </div>
+                <div class="card-body p-4">
+                    <form #matriculaFormRef="ngForm" (ngSubmit)="salvar()">
+                        <!-- Estudante Info -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark">
+                                <i class="bi bi-person me-1"></i>
+                                Estudante
+                            </label>
+                            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-person-circle text-muted"></i>
+                </span>
+                                <div class="form-control border-start-0 ps-0 bg-light">
+                                    {{ authService.getNomeUsuario() }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Curso Selection -->
+                        <div class="mb-4">
+                            <label class="form-label fw-medium text-dark" for="curso">
+                                <i class="bi bi-book me-1"></i>
+                                Curso *
+                            </label>
+                            <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-mortarboard text-muted"></i>
+                </span>
+                                <select
+                                        [(ngModel)]="matriculaRequest.cursoId"
+                                        class="form-select border-start-0 ps-0"
+                                        id="curso"
+                                        name="cursoId"
+                                        required>
+                                    <option value="0">Selecione um curso</option>
+                                    <option *ngFor="let curso of cursos" [value]="curso.id">{{ curso.nome }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Error Message -->
+                        <div *ngIf="erro" class="alert alert-danger border-0 rounded-3 mb-4">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            {{ erro }}
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-3 mt-4">
+                            <button
+                                    [disabled]="!matriculaFormRef.form.valid || carregando"
+                                    class="btn btn-success btn-lg fw-medium py-2"
+                                    type="submit">
+                                <span *ngIf="carregando" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                <i *ngIf="!carregando" class="bi bi-person-plus me-2"></i>
+                                {{ carregando ? 'Realizando Matrícula...' : 'Realizar Matrícula' }}
+                            </button>
+                            <button
+                                    (click)="cancelarCriacao()"
+                                    [disabled]="carregando"
+                                    class="btn btn-outline-secondary fw-medium"
+                                    type="button">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Voltar para Lista
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="card shadow-sm border-0 rounded-4 mt-4">
+                <div class="card-body p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h6 class="fw-bold text-dark mb-1">
+                                <i class="bi bi-info-circle me-2"></i>
+                                Informações da Matrícula
+                            </h6>
+                            <p class="text-muted mb-0">
+                                Você será matriculado automaticamente no curso selecionado
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-end">
+              <span class="badge bg-success bg-opacity-10 text-success fw-medium px-3 py-2 rounded-pill">
+                Nova Matrícula
+              </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

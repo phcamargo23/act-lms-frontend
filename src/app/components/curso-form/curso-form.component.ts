@@ -1,28 +1,35 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
 import {CursoService} from '../../services/curso.service';
-import {Curso} from '../../models/curso.model';
+import {Curso, CursoRequest, CursoResponse} from '../../models/curso.model';
+import {ApiErrorResponse} from '../../models/usuario.model';
 
 @Component({
     selector: 'app-curso-form',
     standalone: true,
     imports: [CommonModule, FormsModule],
     templateUrl: './curso-form.component.html',
-    styleUrl: './curso-form.component.css'
 })
 export class CursoFormComponent implements OnInit, OnChanges {
     @Input() curso?: Curso;
-    @Output() cursoSalvo = new EventEmitter<Curso>();
+    @Output() cursoSalvo = new EventEmitter<CursoResponse>();
+    @Output() cancelar = new EventEmitter<void>();
 
     cursoId?: number;
 
-    cursoForm: Curso = {
+    cursoForm: CursoRequest = {
         nome: ''
     };
 
     isEditando = false;
-    erro = '';
+
+    // Estados do componente (igual ao matriculaform)
+    isLoading = false;
+    isSuccess = false;
+    errorMessage = '';
+    successMessage = '';
 
     constructor(private cursoService: CursoService) {
     }
@@ -42,7 +49,7 @@ export class CursoFormComponent implements OnInit, OnChanges {
     atualizarFormulario() {
         if (this.curso) {
             console.log('Atualizando formulário com curso:', this.curso);
-            this.cursoForm = {...this.curso};
+            this.cursoForm = {nome: this.curso.nome};
             this.cursoId = this.curso.id;
             this.isEditando = true;
         } else {
@@ -51,35 +58,44 @@ export class CursoFormComponent implements OnInit, OnChanges {
     }
 
     salvar() {
-        this.erro = '';
+        // Reset estados anteriores
+        this.resetStates();
+        this.isLoading = true;
 
         if (!this.isFormValid()) {
-            this.erro = 'Por favor, preencha todos os campos obrigatórios';
+            this.errorMessage = 'Por favor, preencha todos os campos obrigatórios';
+            this.isLoading = false;
             return;
         }
 
         if (this.isEditando && this.cursoId) {
             console.log('Atualizando curso:', this.cursoId, this.cursoForm);
             this.cursoService.atualizarCurso(this.cursoId, this.cursoForm).subscribe({
-                next: (curso) => {
-                    console.log('Curso atualizado com sucesso:', curso);
-                    this.cursoSalvo.emit(curso);
+                next: (cursoResponse) => {
+                    console.log('Curso atualizado com sucesso:', cursoResponse);
+                    this.isLoading = false;
+                    this.isSuccess = true;
+                    this.successMessage = 'Curso atualizado com sucesso!';
+                    this.cursoSalvo.emit(cursoResponse);
                     this.resetarFormulario();
                 },
-                error: (error) => {
-                    this.erro = 'Erro ao atualizar curso';
-                    console.error('Erro ao atualizar curso:', error);
+                error: (error: HttpErrorResponse) => {
+                    this.isLoading = false;
+                    this.handleError(error);
                 }
             });
         } else {
             this.cursoService.criarCurso(this.cursoForm).subscribe({
-                next: (curso) => {
-                    this.cursoSalvo.emit(curso);
+                next: (cursoResponse) => {
+                    this.isLoading = false;
+                    this.isSuccess = true;
+                    this.successMessage = 'Curso criado com sucesso!';
+                    this.cursoSalvo.emit(cursoResponse);
                     this.resetarFormulario();
                 },
-                error: (error) => {
-                    this.erro = 'Erro ao criar curso';
-                    console.error('Erro ao criar curso:', error);
+                error: (error: HttpErrorResponse) => {
+                    this.isLoading = false;
+                    this.handleError(error);
                 }
             });
         }
@@ -89,9 +105,34 @@ export class CursoFormComponent implements OnInit, OnChanges {
         this.cursoForm = {nome: ''};
         this.isEditando = false;
         this.cursoId = undefined;
+        this.resetStates();
+    }
+
+    cancelarEdicao() {
+        this.resetarFormulario();
+        this.cancelar.emit();
     }
 
     isFormValid(): boolean {
-        return !!this.cursoForm.nome;
+        return !!this.cursoForm.nome?.trim();
+    }
+
+    private handleError(error: HttpErrorResponse) {
+        console.error('Erro ao salvar curso:', error);
+
+        if (error.status === 400 && error.error) {
+            const apiError: ApiErrorResponse = error.error;
+            this.errorMessage = apiError.message || 'Erro ao salvar curso.';
+        } else {
+            // Erro de conexão ou servidor
+            this.errorMessage = 'Erro de conexão. Verifique sua internet e tente novamente.';
+        }
+    }
+
+    private resetStates() {
+        this.isLoading = false;
+        this.isSuccess = false;
+        this.errorMessage = '';
+        this.successMessage = '';
     }
 }

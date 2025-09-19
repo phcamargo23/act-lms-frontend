@@ -1,39 +1,65 @@
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="nav-brand">
-            <a class="nav-title" routerLink="/">{{ title }}</a>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold fs-4" routerLink="/">
+            <i class="bi bi-mortarboard-fill me-2"></i>{{ title }}
+        </a>
+        <button
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                class="navbar-toggler border-0"
+                data-bs-target="#navbarNav"
+                data-bs-toggle="collapse"
+                type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <!-- Menu completo para usuário logado -->
+                <ng-container *ngIf="usuarioLogado">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link px-3 py-2 rounded-pill fw-medium" routerLink="/matriculas" routerLinkActive="active bg-light text-primary">
+                            <i class="bi bi-person-lines-fill me-1"></i>
+                            Matrículas
+                        </a>
+                    </li>
+                    <!-- Menu de Cursos apenas para Administradores -->
+                    <li *ngIf="isAdmin()" class="nav-item mx-2">
+                        <a class="nav-link px-3 py-2 rounded-pill fw-medium" routerLink="/cursos" routerLinkActive="active bg-light text-primary">
+                            <i class="bi bi-book-fill me-1"></i>
+                            Cursos
+                        </a>
+                    </li>
+                    <li class="nav-item mx-3">
+                        <span class="navbar-text text-light fw-medium">
+                            <i class="bi bi-person-circle me-1"></i>
+                            Olá, {{ getNomeUsuario() }}
+                        </span>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <button (click)="logout()" class="btn btn-outline-light btn-sm px-3 fw-medium">
+                            <i class="bi bi-box-arrow-right me-1"></i>
+                            Sair
+                        </button>
+                    </li>
+                </ng-container>
 
-        <div class="nav-menu">
-            <!-- Menu completo para usuário logado -->
-            <ng-container *ngIf="usuarioLogado">
-                <a class="nav-link" routerLink="/matriculas" routerLinkActive="active">
-                    Matrículas
-                </a>
-                <!-- Menu de Cursos apenas para Administradores -->
-                <a *ngIf="isAdmin()" class="nav-link" routerLink="/cursos" routerLinkActive="active">
-                    Cursos
-                </a>
-                <a class="nav-link" routerLink="/tarefas" routerLinkActive="active">
-                    Tarefas
-                </a>
-                <span class="nav-user">
-                    Olá, {{ getNomeUsuario() }}
-                </span>
-                <button (click)="logout()" class="nav-link nav-logout">
-                    Sair
-                </button>
-            </ng-container>
-
-            <!-- Apenas login e registro para usuário não logado -->
-            <ng-container *ngIf="!usuarioLogado">
-                <a class="nav-link" routerLink="/login" routerLinkActive="active">
-                    Login
-                </a>
-                <a class="nav-link nav-registro" routerLink="/registro" routerLinkActive="active">
-                    Registrar-se
-                </a>
-            </ng-container>
+                <!-- Apenas login e registro para usuário não logado -->
+                <ng-container *ngIf="!usuarioLogado">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link px-3 py-2 rounded-pill fw-medium" routerLink="/login" routerLinkActive="active bg-light text-primary">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>
+                            Login
+                        </a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="btn btn-outline-light px-3 fw-medium" routerLink="/registro" routerLinkActive="active">
+                            <i class="bi bi-person-plus me-1"></i>
+                            Registrar-se
+                        </a>
+                    </li>
+                </ng-container>
+            </ul>
         </div>
     </div>
 </nav>
