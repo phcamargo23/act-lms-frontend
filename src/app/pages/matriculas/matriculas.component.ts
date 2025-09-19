@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {MatriculaTableComponent} from '../../components/matricula-table/matricula-table.component';
+import {MatriculaListComponent} from '../../components/matricula-list/matricula-list.component';
 import {Matricula} from '../../models/matricula.model';
 import {MatriculaService} from '../../services/matricula.service';
 import {AuthService} from '../../services/auth.service';
@@ -9,7 +9,7 @@ import {AuthService} from '../../services/auth.service';
 @Component({
     selector: 'app-matriculas',
     standalone: true,
-    imports: [CommonModule, MatriculaTableComponent],
+    imports: [CommonModule, MatriculaListComponent],
     templateUrl: './matriculas.component.html',
 })
 export class MatriculasComponent implements OnInit {

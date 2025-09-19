@@ -48,3 +48,9 @@ export interface LoginResponse {
     dataCriacao: string;
 }
 
+// Interfaces para tratamento de erros da API
+export interface ApiErrorResponse {
+    message: string;
+    status: number;
+}
+

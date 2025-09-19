@@ -9,6 +9,20 @@
                     </h2>
                 </div>
                 <div class="card-body p-4">
+                    <!-- Mensagem de Sucesso -->
+                    <div *ngIf="isSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="bi bi-check-circle me-2"></i>
+                        {{ successMessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
+                    <!-- Mensagem de Erro -->
+                    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        {{ errorMessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+
                     <form #registroForm="ngForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <div class="col-md-6 mb-4">
@@ -133,11 +147,12 @@
 
                         <div class="d-grid gap-3 mt-4">
                             <button
-                                    [disabled]="!registroForm.form.valid"
+                                    [disabled]="!registroForm.form.valid || isLoading"
                                     class="btn btn-primary btn-lg fw-medium py-2"
                                     type="submit">
-                                <i class="bi bi-person-plus me-2"></i>
-                                Registrar-se
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                <i *ngIf="!isLoading" class="bi bi-person-plus me-2"></i>
+                                {{ isLoading ? 'Registrando...' : 'Registrar-se' }}
                             </button>
                             <button
                                     (click)="cancelar()"

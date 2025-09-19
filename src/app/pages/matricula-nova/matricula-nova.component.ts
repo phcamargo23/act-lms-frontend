@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {MatriculaCreateComponent} from '../../components/matricula-create/matricula-create.component';
+import {MatriculaFormComponent} from '../../components/matricula-form/matricula-form.component';
 import {Matricula} from '../../models/matricula.model';
 
 @Component({
     selector: 'app-matricula-nova',
     standalone: true,
-    imports: [CommonModule, MatriculaCreateComponent],
+    imports: [CommonModule, MatriculaFormComponent],
     templateUrl: './matricula-nova.component.html',
 })
 export class MatriculaNovaComponent {
